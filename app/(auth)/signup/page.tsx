@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function SignupPage() {
-  const supabase = createClient()
   const [fullName, setFullName] = useState('')
   const [organizationName, setOrganizationName] = useState('')
   const [email, setEmail] = useState('')
@@ -17,6 +16,15 @@ export default function SignupPage() {
     event.preventDefault()
     setLoading(true)
     setMessage('')
+
+    let supabase
+    try {
+      supabase = createClient()
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Authentication is not configured')
+      setLoading(false)
+      return
+    }
 
     const { error } = await supabase.auth.signUp({
       email,

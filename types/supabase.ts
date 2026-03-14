@@ -533,6 +533,105 @@ export type Database = {
           },
         ]
       }
+      regulatory_documents: {
+        Row: {
+          action_items: Json
+          affected_areas: Json
+          analysis_model: string | null
+          analysis_status: string
+          analyzed_at: string | null
+          attention_reason: string | null
+          change_type: string | null
+          content: string
+          created_at: string
+          created_by: string | null
+          document_type: string
+          effective_at: string | null
+          id: string
+          impact_level: string | null
+          jurisdiction: string
+          key_points: Json
+          organization_id: string
+          published_at: string | null
+          requires_attention: boolean
+          source: string
+          source_url: string | null
+          summary: string | null
+          tags: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          action_items?: Json
+          affected_areas?: Json
+          analysis_model?: string | null
+          analysis_status?: string
+          analyzed_at?: string | null
+          attention_reason?: string | null
+          change_type?: string | null
+          content: string
+          created_at?: string
+          created_by?: string | null
+          document_type?: string
+          effective_at?: string | null
+          id?: string
+          impact_level?: string | null
+          jurisdiction?: string
+          key_points?: Json
+          organization_id: string
+          published_at?: string | null
+          requires_attention?: boolean
+          source: string
+          source_url?: string | null
+          summary?: string | null
+          tags?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          action_items?: Json
+          affected_areas?: Json
+          analysis_model?: string | null
+          analysis_status?: string
+          analyzed_at?: string | null
+          attention_reason?: string | null
+          change_type?: string | null
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          document_type?: string
+          effective_at?: string | null
+          id?: string
+          impact_level?: string | null
+          jurisdiction?: string
+          key_points?: Json
+          organization_id?: string
+          published_at?: string | null
+          requires_attention?: boolean
+          source?: string
+          source_url?: string | null
+          summary?: string | null
+          tags?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "regulatory_documents_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "regulatory_documents_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reports: {
         Row: {
           case_id: string | null

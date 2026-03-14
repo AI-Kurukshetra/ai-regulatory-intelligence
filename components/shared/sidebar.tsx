@@ -9,6 +9,7 @@ const links = [
   { href: '/overview', label: 'Overview', short: 'OV' },
   { href: '/transactions', label: 'Transactions', short: 'TX' },
   { href: '/alerts', label: 'Alerts', short: 'AL' },
+  { href: '/intelligence', label: 'Intelligence', short: 'IN' },
   { href: '/cases', label: 'Cases', short: 'CS' },
   { href: '/reports', label: 'Reports', short: 'RP' }
 ]
@@ -76,8 +77,8 @@ export function Sidebar() {
           <p className="ui-kicker">Mission focus</p>
           <h2 className="mt-3 text-lg font-semibold">Keep analysts on the signal</h2>
           <p className="ui-copy mt-2 text-sm leading-7">
-            Use Overview for queue pressure, Alerts for live triage, Cases for investigation, and Reports for SAR
-            drafting.
+            Use Overview for queue pressure, Intelligence for regulatory updates, Alerts for live triage, Cases for
+            investigation, and Reports for SAR drafting.
           </p>
         </div>
 

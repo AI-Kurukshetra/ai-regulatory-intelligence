@@ -10,7 +10,6 @@ type LoginFormProps = {
 }
 
 export function LoginForm({ initialError = '' }: LoginFormProps) {
-  const supabase = createClient()
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -21,6 +20,15 @@ export function LoginForm({ initialError = '' }: LoginFormProps) {
     event.preventDefault()
     setLoading(true)
     setMessage('')
+
+    let supabase
+    try {
+      supabase = createClient()
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Authentication is not configured')
+      setLoading(false)
+      return
+    }
 
     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
@@ -37,6 +45,16 @@ export function LoginForm({ initialError = '' }: LoginFormProps) {
   const onMagicLink = async () => {
     setLoading(true)
     setMessage('')
+
+    let supabase
+    try {
+      supabase = createClient()
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Authentication is not configured')
+      setLoading(false)
+      return
+    }
+
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {

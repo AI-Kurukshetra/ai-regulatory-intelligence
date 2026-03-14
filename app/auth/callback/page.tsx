@@ -9,10 +9,10 @@ export default function AuthCallbackPage() {
   const [message, setMessage] = useState('Completing secure sign-in...')
 
   useEffect(() => {
-    const supabase = createClient()
     let cancelled = false
 
     const completeSignIn = async () => {
+      const supabase = createClient()
       const currentUrl = new URL(window.location.href)
       const hashParams = new URLSearchParams(currentUrl.hash.replace(/^#/, ''))
       const code = currentUrl.searchParams.get('code')

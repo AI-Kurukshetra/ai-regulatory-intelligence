@@ -12,6 +12,7 @@ Recorded local migrations:
 - `20260314212000_phase2_ingestion_reliability.sql`
 - `20260314223000_phase3_case_notes.sql`
 - `20260314234500_phase2_scheduler_dispatch.sql`
+- `20260315000500_regulatory_intelligence_mvp.sql`
 
 Known drift to reconcile later:
 - Live Supabase schema includes the sanctions-screening objects from `20260314205000_phase2_sanctions_screening.sql`, but that migration version is not present in the recorded migration ledger.
@@ -65,3 +66,43 @@ Schema changes:
 Behavior changes:
 - Cases can now store investigator notes and render a case timeline.
 - SAR drafting can include investigator notes as part of the AI/manual narrative context.
+
+## 2026-03-14 — Regulatory Intelligence MVP
+
+Added by:
+- `supabase/migrations/20260315000500_regulatory_intelligence_mvp.sql`
+
+Schema changes:
+- Added table `public.regulatory_documents`
+  - `id UUID PRIMARY KEY`
+  - `organization_id UUID REFERENCES organizations(id)`
+  - `title TEXT`
+  - `source TEXT`
+  - `source_url TEXT`
+  - `jurisdiction TEXT`
+  - `document_type TEXT CHECK IN ('rule','guidance','enforcement','notice','policy','other')`
+  - `content TEXT`
+  - `summary TEXT`
+  - `change_type TEXT`
+  - `impact_level TEXT CHECK IN ('critical','high','medium','low')`
+  - `key_points JSONB`
+  - `affected_areas JSONB`
+  - `action_items JSONB`
+  - `tags JSONB`
+  - `requires_attention BOOLEAN`
+  - `attention_reason TEXT`
+  - `analysis_status TEXT CHECK IN ('pending','completed','fallback','failed')`
+  - `analysis_model TEXT`
+  - `published_at TIMESTAMPTZ`
+  - `effective_at TIMESTAMPTZ`
+  - `analyzed_at TIMESTAMPTZ`
+  - `created_by UUID REFERENCES profiles(id)`
+  - `created_at TIMESTAMPTZ`
+  - `updated_at TIMESTAMPTZ`
+- Added indexes `idx_regulatory_documents_org_created`, `idx_regulatory_documents_org_attention`, and `idx_regulatory_documents_org_impact`
+- Enabled RLS on `public.regulatory_documents`
+- Added policy `regulatory_documents_org_all`
+
+Behavior changes:
+- The platform can now ingest regulatory content, persist summaries and action items, and mark high-impact updates that require attention.
+- Regulatory intelligence queries are organization-scoped and support filtered list/detail views in the dashboard.

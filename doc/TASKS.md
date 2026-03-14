@@ -6,6 +6,8 @@
 - [x] 2026-03-14 18:20 Codex — Implement the first Phase 3 slice: case workflow, investigator notes, SAR draft generation, reports API, and working cases/reports dashboard pages.
 - [x] 2026-03-14 23:48 Codex — Prepare Supabase scheduled Edge Function orchestration for Phase 2 queue processing and generate the local `JOB_RUNNER_SECRET`.
 - [x] 2026-03-14 23:59 Codex — Refresh the shared UI and add a light/night theme switch across the auth flow and dashboard shell.
+- [x] 2026-03-14 18:34 Codex — Add the rapid MVP regulatory-intelligence slice: document ingestion/storage, AI summarization, search filters, intelligence dashboard pages, and overview integration.
+- [x] 2026-03-14 18:37 Codex — Repair GitHub/CI `next build` failures by deferring Supabase env access until runtime usage.
 - [!] 2026-03-14 23:48 Codex — Activate hosted Supabase cron for `/api/internal/jobs/process`; blocked until the app has a public base URL instead of `http://localhost:3000`.
 - [ ] 2026-03-14 18:00 Codex — Repair Supabase migration history drift for `20260314205000_phase2_sanctions_screening` so the recorded ledger matches the live schema.
 - [ ] 2026-03-14 18:20 Codex — Implement the remaining Phase 3 KYC document upload and AI analysis flow.

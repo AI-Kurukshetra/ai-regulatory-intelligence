@@ -23,7 +23,8 @@ const statusClassMap: Record<string, string> = {
   skipped: 'border-slate-500/30 bg-slate-500/10 text-slate-200',
   potential: 'border-orange-500/30 bg-orange-500/10 text-orange-200',
   confirmed: 'border-red-500/30 bg-red-500/15 text-red-200',
-  dismissed: 'border-slate-500/30 bg-slate-500/10 text-slate-200'
+  dismissed: 'border-slate-500/30 bg-slate-500/10 text-slate-200',
+  fallback: 'border-violet-500/30 bg-violet-500/10 text-violet-200'
 }
 
 export function StatusBadge({ status }: StatusBadgeProps) {

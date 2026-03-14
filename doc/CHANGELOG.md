@@ -19,3 +19,9 @@
 - 2026-03-14 Codex — Added a client-side light/night theme system, refreshed `app/globals.css`, and upgraded the auth/dashboard shell styling for a faster, more polished operator workflow.
 - 2026-03-14 Codex — Added `components/theme/theme-toggle.tsx` and integrated it into the root layout, auth layout, dashboard layout, and sidebar.
 - 2026-03-14 Codex — Restyled the login/signup forms, live alert feed, transaction filters/table, and case action controls so the new theme works across the highest-traffic UI surfaces.
+- 2026-03-14 Codex — Added `supabase/migrations/20260315000500_regulatory_intelligence_mvp.sql`, creating the `regulatory_documents` table, indexes, and org-scoped RLS policies for regulatory-content storage.
+- 2026-03-14 Codex — Added `lib/regulatory/` queries/service/schema modules and `lib/ai/regulatory-analysis.ts` for AI-backed regulatory summarization with a deterministic fallback path.
+- 2026-03-14 Codex — Added `GET/POST /api/v1/regulatory-documents` and `GET /api/v1/regulatory-documents/[id]` for regulatory document ingestion, search, summary metrics, and detail retrieval.
+- 2026-03-14 Codex — Added the `/intelligence` workspace, a document-ingest form, a document detail page, overview dashboard intelligence widgets, and navigation links so the new MVP flow is visible end to end.
+- 2026-03-14 Codex — Added `tests/regulatory-analysis.test.ts` and updated `vitest.config.ts` to resolve the repo `@/` alias during tests, giving the new intelligence fallback path direct unit coverage.
+- 2026-03-14 Codex — Refactored `lib/supabase/admin.ts` to lazily create the service-role client and moved auth-page browser client creation into request/effect handlers so `next build` no longer crashes in CI when Supabase env vars are absent during module analysis.
