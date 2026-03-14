@@ -22,11 +22,11 @@ export default async function AlertsPage() {
   return (
     <section className="space-y-6">
       <header className="glass-card rounded-2xl p-6">
-        <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">Phase 2 Extension</p>
+        <p className="ui-kicker">Realtime triage</p>
         <h1 className="mt-2 text-3xl font-semibold">Live Alert Feed</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
-          Alerts created by the scoring worker now stream into the dashboard in real time through Supabase Realtime.
-          Assignment and case workflows still stay in later phases, but visibility is now live instead of placeholder-only.
+          Alerts created by the scoring worker stream into the dashboard in real time through Supabase Realtime.
+          Analysts can review, assign context, and open a case directly from the feed without losing pace.
         </p>
       </header>
 
@@ -61,7 +61,11 @@ export default async function AlertsPage() {
         </div>
       ) : null}
 
-      <LiveAlertFeed initialAlerts={alerts} organizationId={profile.organization_id} />
+      <LiveAlertFeed
+        canCreateCase={profile.role === 'admin' || profile.role === 'compliance_officer' || profile.role === 'analyst'}
+        initialAlerts={alerts}
+        organizationId={profile.organization_id}
+      />
     </section>
   )
 }

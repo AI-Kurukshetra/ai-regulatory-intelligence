@@ -41,14 +41,15 @@ export default function SignupPage() {
   }
 
   return (
-    <section className="glass-card w-full max-w-md rounded-2xl p-8">
-      <h1 className="mb-2 text-2xl font-semibold">Create account</h1>
-      <p className="mb-6 text-sm text-slate-400">
+    <section className="glass-card w-full max-w-md rounded-[32px] p-8 md:p-10">
+      <p className="ui-kicker">Get started</p>
+      <h1 className="mt-3 text-3xl font-semibold tracking-tight">Create your workspace</h1>
+      <p className="ui-copy mt-3 text-sm leading-7">
         Create your admin account. Your organization and profile will be provisioned automatically.
       </p>
       <form className="space-y-4" onSubmit={onSubmit}>
         <input
-          className="w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm outline-none focus:border-cyan-400"
+          className="ui-input px-4 py-3 text-sm"
           type="text"
           placeholder="Full name"
           value={fullName}
@@ -56,7 +57,7 @@ export default function SignupPage() {
           required
         />
         <input
-          className="w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm outline-none focus:border-cyan-400"
+          className="ui-input px-4 py-3 text-sm"
           type="text"
           placeholder="Organization name"
           value={organizationName}
@@ -64,7 +65,7 @@ export default function SignupPage() {
           required
         />
         <input
-          className="w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm outline-none focus:border-cyan-400"
+          className="ui-input px-4 py-3 text-sm"
           type="email"
           placeholder="you@company.com"
           value={email}
@@ -72,7 +73,7 @@ export default function SignupPage() {
           required
         />
         <input
-          className="w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm outline-none focus:border-cyan-400"
+          className="ui-input px-4 py-3 text-sm"
           type="password"
           placeholder="Choose a strong password"
           value={password}
@@ -81,7 +82,7 @@ export default function SignupPage() {
           required
         />
         <button
-          className="w-full rounded-lg bg-cyan-500 px-3 py-2 text-sm font-medium text-slate-900 hover:bg-cyan-400 disabled:opacity-70"
+          className="ui-button-primary w-full px-4 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-70"
           disabled={loading}
           type="submit"
         >
@@ -89,14 +90,17 @@ export default function SignupPage() {
         </button>
       </form>
 
-      {message ? <p className="mt-4 text-sm text-slate-300">{message}</p> : null}
-      <p className="mt-6 text-sm text-slate-400">
+      {message ? (
+        <p className="mt-4 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-soft)] px-4 py-3 text-sm text-[var(--text-secondary)]">
+          {message}
+        </p>
+      ) : null}
+      <p className="ui-copy mt-6 text-sm">
         Already have an account?{' '}
-        <Link className="text-cyan-300 hover:underline" href="/login">
+        <Link className="ui-link font-medium hover:underline" href="/login">
           Sign in
         </Link>
       </p>
     </section>
   )
 }
-

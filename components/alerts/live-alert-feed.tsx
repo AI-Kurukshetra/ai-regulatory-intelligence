@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js'
+import { CreateCaseFromAlertButton } from '@/components/cases/create-case-from-alert-button'
 import { RiskBadge } from '@/components/transactions/risk-badge'
 import { StatusBadge } from '@/components/transactions/status-badge'
 import { createClient } from '@/lib/supabase/client'
@@ -15,6 +16,7 @@ type AlertRow = Database['public']['Tables']['alerts']['Row']
 type LiveAlertFeedProps = {
   initialAlerts: AlertListItem[]
   organizationId: string
+  canCreateCase?: boolean
 }
 
 function sortAlerts(alerts: AlertListItem[]) {
@@ -42,7 +44,11 @@ function upsertAlert(existingAlerts: AlertListItem[], incomingAlert: AlertListIt
   return sortAlerts(nextAlerts).slice(0, 25)
 }
 
-export function LiveAlertFeed({ initialAlerts, organizationId }: LiveAlertFeedProps) {
+export function LiveAlertFeed({
+  initialAlerts,
+  organizationId,
+  canCreateCase = false
+}: LiveAlertFeedProps) {
   const supabase = useMemo(() => createClient(), [])
   const [alerts, setAlerts] = useState(() => sortAlerts(initialAlerts))
   const [connectionState, setConnectionState] = useState<'connecting' | 'live'>('connecting')
@@ -91,10 +97,10 @@ export function LiveAlertFeed({ initialAlerts, organizationId }: LiveAlertFeedPr
 
   if (alerts.length === 0) {
     return (
-      <div className="glass-card rounded-2xl p-8 text-center">
-        <p className="text-sm uppercase tracking-[0.2em] text-slate-500">No active alerts</p>
+      <div className="glass-card rounded-[28px] p-8 text-center">
+        <p className="text-sm uppercase tracking-[0.2em] text-[var(--text-muted)]">No active alerts</p>
         <h2 className="mt-3 text-xl font-semibold">The live feed is quiet</h2>
-        <p className="mt-2 text-sm text-slate-400">
+        <p className="mt-2 text-sm text-[var(--text-secondary)]">
           As soon as a transaction crosses the review threshold, it will appear here automatically.
         </p>
       </div>
@@ -102,14 +108,14 @@ export function LiveAlertFeed({ initialAlerts, organizationId }: LiveAlertFeedPr
   }
 
   return (
-    <div className="glass-card rounded-2xl p-4">
-      <div className="mb-4 flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+    <div className="glass-card rounded-[28px] p-5">
+      <div className="mb-4 flex items-center justify-between gap-3 border-b border-[var(--glass-border)] pb-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Realtime feed</p>
+          <p className="ui-kicker">Realtime feed</p>
           <h2 className="mt-2 text-xl font-semibold">Latest alerts</h2>
         </div>
-        <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs uppercase tracking-[0.16em] text-cyan-100">
-          <span className="h-2 w-2 rounded-full bg-cyan-300" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--glass-border-strong)] bg-[var(--glass-soft)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--accent-primary)]">
+          <span className="h-2 w-2 rounded-full bg-[var(--accent-primary)]" />
           {connectionState}
         </div>
       </div>
@@ -118,7 +124,7 @@ export function LiveAlertFeed({ initialAlerts, organizationId }: LiveAlertFeedPr
         {alerts.map((alert) => (
           <article
             key={alert.id}
-            className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:bg-white/[0.05]"
+            className="rounded-[24px] border border-[var(--glass-border)] bg-[var(--glass-soft)] p-4 transition hover:border-[var(--glass-border-strong)] hover:bg-[var(--glass-bg-hover)]"
           >
             <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
               <div className="space-y-2">
@@ -126,27 +132,37 @@ export function LiveAlertFeed({ initialAlerts, organizationId }: LiveAlertFeedPr
                   <RiskBadge level={alert.severity} />
                   <StatusBadge status={alert.status} />
                 </div>
-                <h3 className="text-lg font-medium text-slate-100">{alert.title}</h3>
-                <p className="text-sm text-slate-400">{alert.description ?? 'No alert description available.'}</p>
+                <h3 className="text-lg font-medium text-[var(--text-primary)]">{alert.title}</h3>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  {alert.description ?? 'No alert description available.'}
+                </p>
               </div>
-              <div className="text-right text-xs uppercase tracking-[0.16em] text-slate-500">
+              <div className="text-right text-xs uppercase tracking-[0.16em] text-[var(--text-muted)]">
                 <p>{formatLabel(alert.alert_type)}</p>
                 <p className="mt-2">{formatDateTime(alert.created_at)}</p>
               </div>
             </div>
 
-            <div className="mt-4 flex flex-col gap-2 text-sm text-slate-300 md:flex-row md:items-center md:justify-between">
+            <div className="mt-4 flex flex-col gap-2 text-sm text-[var(--text-secondary)] md:flex-row md:items-center md:justify-between">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="font-mono text-xs text-slate-500">{formatCompactId(alert.id, 8, 4)}</span>
+                <span className="font-mono text-xs text-[var(--text-muted)]">{formatCompactId(alert.id, 8, 4)}</span>
                 {alert.transaction_id ? (
                   <Link
-                    className="text-cyan-300 transition hover:text-cyan-200 hover:underline"
+                    className="ui-link transition hover:underline"
                     href={`/transactions/${alert.transaction_id}`}
                   >
                     Review transaction
                   </Link>
                 ) : null}
               </div>
+              {canCreateCase ? (
+                <CreateCaseFromAlertButton
+                  alertId={alert.id}
+                  description={alert.description}
+                  severity={alert.severity}
+                  title={alert.title}
+                />
+              ) : null}
             </div>
           </article>
         ))}

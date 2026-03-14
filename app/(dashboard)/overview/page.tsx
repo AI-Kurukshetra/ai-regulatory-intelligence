@@ -68,11 +68,11 @@ export default async function OverviewPage() {
   return (
     <section className="space-y-6">
       <header className="glass-card rounded-2xl p-6">
-        <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">Phase 2 Operations Snapshot</p>
+        <p className="ui-kicker">Live operations snapshot</p>
         <h1 className="mt-2 text-3xl font-semibold">Regulatory Intelligence Overview</h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
-          Transaction ingestion, queue-backed processing, rule-based scoring, and realtime alert visibility are now
-          wired into the dashboard. Case workflows and SAR drafting still remain in later phases.
+          Transaction ingestion, queue-backed processing, live alerts, case operations, and SAR drafting now share the
+          same protected workspace. Use this page to spot pressure, review new escalations, and keep the team aligned.
         </p>
         <div className="mt-4 flex flex-wrap gap-4 text-xs uppercase tracking-[0.16em] text-slate-500">
           <span>{user.email ?? 'unknown-user'}</span>
@@ -149,7 +149,11 @@ export default async function OverviewPage() {
         </div>
       ) : null}
 
-      <LiveAlertFeed initialAlerts={alerts ?? []} organizationId={profile.organization_id} />
+      <LiveAlertFeed
+        canCreateCase={profile.role === 'admin' || profile.role === 'compliance_officer' || profile.role === 'analyst'}
+        initialAlerts={alerts ?? []}
+        organizationId={profile.organization_id}
+      />
     </section>
   )
 }

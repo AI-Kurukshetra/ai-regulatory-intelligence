@@ -91,14 +91,14 @@ export function TransactionFilters({
   }
 
   return (
-    <form className="glass-card rounded-2xl p-4" onSubmit={onApply}>
+    <form className="glass-card rounded-[28px] p-4" onSubmit={onApply}>
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end">
         <div className="flex-1">
-          <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-slate-400" htmlFor="status">
+          <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]" htmlFor="status">
             Status
           </label>
           <select
-            className="w-full rounded-xl border border-white/15 bg-[#0A1628]/90 px-3 py-2.5 text-sm outline-none transition focus:border-cyan-400"
+            className="ui-select px-3 py-2.5 text-sm"
             id="status"
             onChange={(event) => setStatus(event.target.value)}
             value={status}
@@ -113,13 +113,13 @@ export function TransactionFilters({
 
         <div className="flex-1">
           <label
-            className="mb-2 block text-xs uppercase tracking-[0.2em] text-slate-400"
+            className="mb-2 block text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]"
             htmlFor="risk-level"
           >
             Risk level
           </label>
           <select
-            className="w-full rounded-xl border border-white/15 bg-[#0A1628]/90 px-3 py-2.5 text-sm outline-none transition focus:border-cyan-400"
+            className="ui-select px-3 py-2.5 text-sm"
             id="risk-level"
             onChange={(event) => setRiskLevel(event.target.value)}
             value={riskLevel}
@@ -133,11 +133,11 @@ export function TransactionFilters({
         </div>
 
         <div className="w-full lg:w-36">
-          <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-slate-400" htmlFor="limit">
+          <label className="mb-2 block text-xs uppercase tracking-[0.2em] text-[var(--text-muted)]" htmlFor="limit">
             Rows
           </label>
           <select
-            className="w-full rounded-xl border border-white/15 bg-[#0A1628]/90 px-3 py-2.5 text-sm outline-none transition focus:border-cyan-400"
+            className="ui-select px-3 py-2.5 text-sm"
             id="limit"
             onChange={(event) => setLimit(event.target.value)}
             value={limit}
@@ -152,14 +152,14 @@ export function TransactionFilters({
 
         <div className="flex gap-3 lg:pb-0.5">
           <button
-            className="rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-medium text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-70"
+            className="ui-button-primary px-4 py-2.5 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-70"
             disabled={isPending}
             type="submit"
           >
             {isPending ? 'Updating...' : 'Apply filters'}
           </button>
           <button
-            className="rounded-xl border border-white/15 px-4 py-2.5 text-sm text-slate-200 transition hover:bg-white/5"
+            className="ui-button-secondary px-4 py-2.5 text-sm"
             onClick={onReset}
             type="button"
           >

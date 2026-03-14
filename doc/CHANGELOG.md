@@ -7,3 +7,15 @@
 - 2026-03-14 Codex — Updated `lib/ai/risk-scoring.ts` prompt context so sanctions screening is described as a separate worker instead of “not implemented”.
 - 2026-03-14 Codex — Replaced the placeholder overview dashboard with a live Phase 2 operations snapshot in `app/(dashboard)/overview/page.tsx`.
 - 2026-03-14 Codex — Added `scripts/phase-gate.sh` so Foundation and Transaction Core gates have a repeatable local validation command.
+- 2026-03-14 Codex — Added `supabase/migrations/20260314223000_phase3_case_notes.sql` and applied it to Supabase to support investigator notes on cases.
+- 2026-03-14 Codex — Added Phase 3 domain modules under `lib/cases/`, `lib/reports/`, `lib/ai/sar-draft.ts`, and `lib/audit/service.ts`.
+- 2026-03-14 Codex — Added Phase 3 API routes for cases, case notes, SAR drafting, and reports under `app/api/v1/`.
+- 2026-03-14 Codex — Replaced placeholder `Cases` and `Reports` pages with working dashboard pages and added `app/(dashboard)/cases/[id]/page.tsx`.
+- 2026-03-14 Codex — Added client components for alert-to-case conversion, case status updates, case notes, and SAR draft generation.
+- 2026-03-14 Codex — Added Phase 3 unit coverage for case transition rules and SAR draft fallback behavior.
+- 2026-03-14 Codex — Added `supabase/migrations/20260314234500_phase2_scheduler_dispatch.sql`, enabling `pg_cron`/`pg_net` and a Vault-backed `public.invoke_phase2_job_scheduler(...)` helper for Supabase scheduling.
+- 2026-03-14 Codex — Added and deployed the Supabase Edge Function `supabase/functions/process-jobs/index.ts` to fan out scheduled job requests to the existing internal Phase 2 job processor.
+- 2026-03-14 Codex — Generated and stored a local `JOB_RUNNER_SECRET` in `.env.local` for the internal job processor and Supabase scheduler handoff.
+- 2026-03-14 Codex — Added a client-side light/night theme system, refreshed `app/globals.css`, and upgraded the auth/dashboard shell styling for a faster, more polished operator workflow.
+- 2026-03-14 Codex — Added `components/theme/theme-toggle.tsx` and integrated it into the root layout, auth layout, dashboard layout, and sidebar.
+- 2026-03-14 Codex — Restyled the login/signup forms, live alert feed, transaction filters/table, and case action controls so the new theme works across the highest-traffic UI surfaces.

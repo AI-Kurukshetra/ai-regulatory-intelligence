@@ -232,6 +232,55 @@ export type Database = {
           },
         ]
       }
+      case_notes: {
+        Row: {
+          author_user_id: string
+          case_id: string
+          created_at: string
+          id: string
+          note: string
+          organization_id: string
+        }
+        Insert: {
+          author_user_id: string
+          case_id: string
+          created_at?: string
+          id?: string
+          note: string
+          organization_id: string
+        }
+        Update: {
+          author_user_id?: string
+          case_id?: string
+          created_at?: string
+          id?: string
+          note?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_notes_author_user_id_fkey"
+            columns: ["author_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "case_notes_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "case_notes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cases: {
         Row: {
           assigned_to: string | null
@@ -888,6 +937,10 @@ export type Database = {
           jobs_enqueued: number
           transaction_id: string
         }[]
+      }
+      invoke_phase2_job_scheduler: {
+        Args: { p_job_types?: string[]; p_limit?: number }
+        Returns: number
       }
       normalize_screening_name: { Args: { input: string }; Returns: string }
       search_watchlist_candidates: {
