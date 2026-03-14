@@ -26,4 +26,5 @@
 - 2026-03-14 Codex — Added `tests/regulatory-analysis.test.ts` and updated `vitest.config.ts` to resolve the repo `@/` alias during tests, giving the new intelligence fallback path direct unit coverage.
 - 2026-03-14 Codex — Refactored `lib/supabase/admin.ts` to lazily create the service-role client and moved auth-page browser client creation into request/effect handlers so `next build` no longer crashes in CI when Supabase env vars are absent during module analysis.
 - 2026-03-14 Codex — Created the Vercel project `ai-regulatory-intelligence`, set the required production environment variables, pinned the Vercel runtime to Node 22.x, and deployed the live app at `https://ai-regulatory-intelligence.vercel.app`.
+- 2026-03-14 Codex — Published a new Vercel production deployment for `https://ai-regulatory-intelligence.vercel.app` and confirmed the live `POST /api/auth/signout` route now redirects to `/login`.
 - 2026-03-14 Codex — Changed `app/api/auth/signout/route.ts` to return a `303` redirect to `/login` after Supabase signout so browser form submissions no longer land on the raw `/api/auth/signout` JSON response.

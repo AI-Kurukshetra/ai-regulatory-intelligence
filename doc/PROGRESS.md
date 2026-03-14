@@ -14,3 +14,4 @@
 [2026-03-14 18:49] Codex — Repaired a corrupted local `.next` state by removing the stale build output, rebuilding successfully, and verifying `/`, `/overview`, and `/login` no longer return 500 errors.
 [2026-03-14 18:56] Codex — Created the Vercel project, pinned it to Node 22.x, configured production env vars, deployed `https://ai-regulatory-intelligence.vercel.app`, and verified `/api/v1/health` returned 200.
 [2026-03-14 19:09] Codex — Updated `POST /api/auth/signout` to return a `303` redirect to `/login` after signout and verified the route locally; publishing the fix to Vercel is blocked on missing local deployment credentials.
+[2026-03-14 19:17] Codex — Redeployed `https://ai-regulatory-intelligence.vercel.app`, verified `/api/v1/health` returned 200, and confirmed `POST /api/auth/signout` now returns `303` to `/login` on production.

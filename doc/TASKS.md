@@ -12,6 +12,7 @@
 - [x] 2026-03-14 18:49 Codex — Repair the local Next runtime after corrupted `.next` artifacts caused `_document` module and `routes-manifest.json` boot failures.
 - [x] 2026-03-14 18:56 Codex — Deploy the app to Vercel, configure the required production environment variables, and publish `https://ai-regulatory-intelligence.vercel.app`.
 - [x] 2026-03-14 19:09 Codex — Fix browser logout so `POST /api/auth/signout` redirects to `/login` instead of rendering raw JSON.
+- [x] 2026-03-14 19:17 Codex — Redeploy the latest workspace to Vercel production and verify the live logout redirect and health endpoints.
 - [ ] 2026-03-14 23:48 Codex — Activate hosted Supabase cron for `/api/internal/jobs/process` now that the public base URL `https://ai-regulatory-intelligence.vercel.app` is available.
 - [ ] 2026-03-14 18:00 Codex — Repair Supabase migration history drift for `20260314205000_phase2_sanctions_screening` so the recorded ledger matches the live schema.
 - [ ] 2026-03-14 18:20 Codex — Implement the remaining Phase 3 KYC document upload and AI analysis flow.
