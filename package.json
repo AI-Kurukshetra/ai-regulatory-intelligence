@@ -1,0 +1,39 @@
+{
+  "name": "ai-regulatory-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clean:next": "node scripts/clean-next.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "import:ofac": "node scripts/import-ofac-sdn.mjs",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "verify:rls": "node scripts/verify-rls.mjs"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.57.4",
+    "clsx": "^2.1.1",
+    "next": "^15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.34.0",
+    "eslint-config-next": "^15.3.0",
+    "postcss": "^8.5.6",
+    "supabase": "^2.78.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

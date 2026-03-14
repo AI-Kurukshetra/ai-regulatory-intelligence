@@ -1,0 +1,4 @@
+interface:
+  display_name: "RegTech Dev"
+  short_description: "Build this AML platform by phase"
+  default_prompt: "Use $develop-regtech-platform to build or debug the AI Regulatory Intelligence Platform in this repository phase by phase."
