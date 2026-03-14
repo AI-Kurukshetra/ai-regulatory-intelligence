@@ -13,3 +13,4 @@
 [2026-03-14 18:44] Codex — Seeded the linked Supabase `bacancy.com` tenant with demo customers, accounts, transactions, alerts, cases, reports, regulatory documents, and a sanctions hit so the MVP dashboard pages render with data.
 [2026-03-14 18:49] Codex — Repaired a corrupted local `.next` state by removing the stale build output, rebuilding successfully, and verifying `/`, `/overview`, and `/login` no longer return 500 errors.
 [2026-03-14 18:56] Codex — Created the Vercel project, pinned it to Node 22.x, configured production env vars, deployed `https://ai-regulatory-intelligence.vercel.app`, and verified `/api/v1/health` returned 200.
+[2026-03-14 19:09] Codex — Updated `POST /api/auth/signout` to return a `303` redirect to `/login` after signout and verified the route locally; publishing the fix to Vercel is blocked on missing local deployment credentials.
