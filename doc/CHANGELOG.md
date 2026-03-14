@@ -25,3 +25,4 @@
 - 2026-03-14 Codex — Added the `/intelligence` workspace, a document-ingest form, a document detail page, overview dashboard intelligence widgets, and navigation links so the new MVP flow is visible end to end.
 - 2026-03-14 Codex — Added `tests/regulatory-analysis.test.ts` and updated `vitest.config.ts` to resolve the repo `@/` alias during tests, giving the new intelligence fallback path direct unit coverage.
 - 2026-03-14 Codex — Refactored `lib/supabase/admin.ts` to lazily create the service-role client and moved auth-page browser client creation into request/effect handlers so `next build` no longer crashes in CI when Supabase env vars are absent during module analysis.
+- 2026-03-14 Codex — Created the Vercel project `ai-regulatory-intelligence`, set the required production environment variables, pinned the Vercel runtime to Node 22.x, and deployed the live app at `https://ai-regulatory-intelligence.vercel.app`.

@@ -10,3 +10,6 @@
 [2026-03-14 23:59] Codex — Refreshed the auth/dashboard UI, added a persistent light/night theme toggle, and verified the app with `tsc --noEmit`, `next lint`, and `next build`.
 [2026-03-14 18:34] Codex — Added the rapid MVP regulatory-intelligence slice with a new `regulatory_documents` table, AI/fallback document analysis, regulatory APIs, intelligence dashboard pages, overview integration, and green validation on typecheck/tests/lint/build.
 [2026-03-14 18:37] Codex — Fixed GitHub/CI `next build` failures by lazily creating the Supabase admin/browser clients; verified `npm run typecheck`, `npm run test`, and `NEXT_PUBLIC_SUPABASE_URL= NEXT_PUBLIC_SUPABASE_ANON_KEY= SUPABASE_SERVICE_ROLE_KEY= npm run build`.
+[2026-03-14 18:44] Codex — Seeded the linked Supabase `bacancy.com` tenant with demo customers, accounts, transactions, alerts, cases, reports, regulatory documents, and a sanctions hit so the MVP dashboard pages render with data.
+[2026-03-14 18:49] Codex — Repaired a corrupted local `.next` state by removing the stale build output, rebuilding successfully, and verifying `/`, `/overview`, and `/login` no longer return 500 errors.
+[2026-03-14 18:56] Codex — Created the Vercel project, pinned it to Node 22.x, configured production env vars, deployed `https://ai-regulatory-intelligence.vercel.app`, and verified `/api/v1/health` returned 200.
